@@ -74,8 +74,6 @@ def cache(
                 await backend.set(cache_key, coder.encode(ret), expire or FastAPICache.get_expire())
                 return ret
 
-            if request.method != "GET":
-                return await func(request, *args, **kwargs)
             if_none_match = request.headers.get("if-none-match")
             if ret is not None:
                 if response:
